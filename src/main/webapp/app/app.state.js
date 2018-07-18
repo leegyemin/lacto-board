@@ -1,4 +1,4 @@
-(function () {
+(function() {
     'use strict';
 
     angular
@@ -20,8 +20,13 @@
                     templateUrl: 'app/shared/layouts/footer/footer.html'
                 }
             },
-            resolve: {}
+            resolve: {
+                authorize: authorize
+            }
         });
     }
 
+    function authorize(Auth) {
+        return Auth.authorize_new();
+    }
 })();
