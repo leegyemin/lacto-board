@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Board</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <!-- build:css content/css/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/iCheck/skins/square/grey.css">
+    <link rel="stylesheet" href="bower_components/animate.css/animate.css">
+    <link rel="stylesheet" href="bower_components/sweetalert2/dist/sweetalert2.css">
+    <link rel="stylesheet" href="bower_components/chartist/dist/chartist.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css">
+    <link rel="stylesheet" href="bower_components/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.css">
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
+    <!-- endinject -->
+    <!-- endbuild -->
+    <!-- build:css content/css/main.css -->
+    <link rel="stylesheet" href="content/css/sticky-footer-navbar.css">
+    <link rel="stylesheet" href="content/css/bootstrap.css">
+    <!-- endbuild -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css" >
+</head>
+<body ng-app="rocktoBoard" ng-cloak>
+    <page-ribbon></page-ribbon>
+    <div ui-view="navbar"></div>
+    <spinner ng-hide="stateResolved"></spinner>
+    <div class="container" ui-view="content" autoscroll="true"></div>
+    <footer class="footer" ui-view="footer"></footer>
+    <!-- build:js app/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/blob-polyfill/Blob.js"></script>
+    <script src="bower_components/file-saver.js/FileSaver.js"></script>
+    <script src="bower_components/gsap/src/uncompressed/TweenMax.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <script src="bower_components/messageformat/messageformat.js"></script>
+    <script src="bower_components/iCheck/icheck.js"></script>
+    <script src="bower_components/es6-promise/es6-promise.js"></script>
+    <script src="bower_components/sweetalert2/dist/sweetalert2.js"></script>
+    <script src="bower_components/chartist/dist/chartist.min.js"></script>
+    <script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/topojson/topojson.js"></script>
+    <script src="bower_components/d3-geo-projection/d3.geo.projection.js"></script>
+    <script src="bower_components/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="bower_components/summernote/dist/summernote.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.js"></script>
+    <script src="bower_components/angular-file-saver/dist/angular-file-saver.bundle.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+    <script src="bower_components/ngFx/dist/ngFx.js"></script>
+    <script src="bower_components/restangular/dist/restangular.js"></script>
+    <script src="bower_components/ng-eternicode-datepicker/dist/ng-eternicode-datepicker.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
+    <script src="bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js"></script>
+    <script src="bower_components/datamaps/dist/datamaps.all.js"></script>
+    <script src="bower_components/angular-summernote/dist/angular-summernote.js"></script>
+    <script src="bower_components/angular-datamaps/dist/angular-datamaps.min.js"></script>
+    <!-- endinject -->
+    <!-- endbuild -->
+    <!-- build:js app/app.js  -->
+    <!-- inject:js -->
+    <script src="app/app.module.js"></script>
+
+    <script src="app/shared/services/auth/principal.service.js"></script>
+    <script src="app/shared/services/auth/auth.service.js"></script>
+    <script src="app/shared/services/auth/auth.jwt.service.js"></script>
+
+    <script src="app/shared/layouts/spinner/spinner.directive.js"></script>
+    <script src="app/shared/layouts/page/page.state.js"></script>
+    <script src="app/shared/layouts/navbar/service-in.directive.js"></script>
+    <script src="app/shared/layouts/navbar/navbar.controller.js"></script>
+
+    <script src="app/shared/interceptor/response.interceptor.js"></script>
+    <script src="app/shared/interceptor/notification.interceptor.js"></script>
+    <script src="app/shared/interceptor/errorhandler.interceptor.js"></script>
+    <script src="app/shared/interceptor/auth-recovery.interceptor.js"></script>
+    <script src="app/shared/interceptor/auth-expired.interceptor.js"></script>
+    <script src="app/shared/interceptor/auth.interceptor.js"></script>
+    <script src="app/shared/handlers/state.handler.js"></script>
+    <script src="app/shared/constants/authority.js"></script>
+    <script src="app/shared/config/uib-pagination.config.js"></script>
+    <script src="app/shared/config/uib-pager.config.js"></script>
+    <script src="app/shared/config/translation.config.js"></script>
+    <script src="app/shared/config/restangular.config.js"></script>
+    <script src="app/shared/config/localstorage.config.js"></script>
+    <script src="app/shared/config/korean-input.config.js"></script>
+    <script src="app/shared/config/http.config.js"></script>
+    <script src="app/shared/config/datepicker.config.js"></script>
+    <script src="app/shared/config/compile.config.js"></script>
+    <script src="app/shared/config/alert.config.js"></script>
+
+    <script src="app/app.state.js"></script>
+    <script src="app/app.constants.js"></script>
+
+    <script src="app/+start/start.state.js"></script>
+    <script src="app/+start/start.controller.js"></script>
+    <script src="app/+signup/signup.state.js"></script>
+    <script src="app/+signup/signup.controller.js"></script>
+    <script src="app/+signin/signin.state.js"></script>
+    <script src="app/+signin/signin.controller.js"></script>
+
+    <script src="app/+admin/+board/board.state.js"></script>
+    <script src="app/+admin/+board/+list/list.state.js"></script>
+    <script src="app/+admin/+board/+list/list.controller.js"></script>
+    <script src="app/+admin/+board/+detail/detail.state.js"></script>
+    <script src="app/+admin/+board/+detail/detail.controller.js"></script>
+    <script src="app/+admin/+board/+creation/creation.state.js"></script>
+    <script src="app/+admin/+board/+creation/creation.controller.js"></script>
+
+    <!-- endinject -->
+    <!-- endbuild -->
+</body>
+</html>
