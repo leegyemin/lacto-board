@@ -23,22 +23,47 @@
             deleteReply: deleteReply
         };
 
+        /**
+         * get board list
+         * @param data
+         * @returns {*}
+         */
         function getBoardList(data) {
             return admin.one('board').doPOST(data, 'list');
         }
 
+        /**
+         * get board
+         * @param id
+         * @returns {*}
+         */
         function getBoard(id) {
             return admin.one('board').one('detail', id).doGET();
         }
 
+        /**
+         * create board
+         * @param data
+         * @returns {*}
+         */
         function createBoard(data) {
             return admin.doPOST(data, 'board');
         }
 
+        /**
+         * modify board
+         * @param data
+         * @returns {*}
+         */
         function modifyBoard(data) {
             return admin.doPUT(data, 'board');
         }
 
+        /**
+         * delete board
+         * @param id
+         * @returns {*}
+         */
         function deleteBoard(id) {
             return admin.one('board', id).doDELETE();
         }
