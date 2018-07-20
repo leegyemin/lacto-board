@@ -13,7 +13,7 @@
         // Variable Declarations
         vm.boardList = boardList;
         vm.currentPage = 1;
-        vm.pageSize =  10;
+        vm.pageSize = 10;
         vm.totalCount = null;
 
         // Function Declarations
@@ -41,6 +41,22 @@
             vm.totalCount = response.totalCount;
         }
 
+        function search(isSearchButton) {
+            var data = _buildSearchCondition();
+            data.page = isSearchButton ? 1 : vm.currentPage;
+            data.pageSize = vm.pageSize;
+
+            $stateParams.filter = data;
+            vm.stateParamFilter = $stateParams.filter;
+            Admin.getBoardList(data).then(searchSuccess);
+        }
+
+        function _buildSearchCondition() {
+            return {
+                keywordType: vm.keywordType !== 'ALL' && vm.keyword ? vm.keywordType : undefined,
+                keyword: vm.keyword ? vm.keyword : undefined
+            };
+        }
 
     }
 })();

@@ -28,7 +28,9 @@
                             <input type="text" class="form-control wd_90p" ng-model="vm.keyword">
                         </div>
                         <div class="col-sm-2">
-                            <button type="button" class="btn btn-sm wd_100 pull-right" button-style><i class="fa fa-search fa-fw"></i> Search</button>
+                            <button type="button" class="btn btn-sm wd_100 pull-right" button-style
+                                    ng-click="vm.search('true')"><i class="fa fa-search fa-fw"></i> Search
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -36,7 +38,7 @@
             <div class="tab-pane active mg_t50" id="mtlist_tab1">
                 <div class="row">
                     <label class="fs_14">Search Results <span class="text-olive mg_l10">{{vm.totalCount}}</span></label>
-                    <select class="select02 wd_50 pull-right" ng-model="vm.pageSize">
+                    <select class="select02 wd_50 pull-right" ng-model="vm.pageSize" ng-change="vm.search()">
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
@@ -56,8 +58,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="data in vm.boardList" ui-sref="admin.boarddetail({filter: vm.stateParamFilter, id: data.id})">
+                        <tr ng-repeat="data in vm.boardList"
+                            ui-sref="admin.boarddetail({filter: vm.stateParamFilter, id: data.id})">
                             <td>{{data.id}}</td>
+                            <td class="text-left">{{data.title}} <span class="text-red" ng-show="data.replyCount > 0">[{{data.replyCount}}]</span>
+                            </td>
+                            <td><i class="fa fa-paperclip fa-fw" ng-show="data.uploadFiles"></i></td>
+                            <td>{{data.name}}</td>
+                            <td>{{data.updated | date:'yyyy-MM-dd'}}</td>
+                            <td>{{data.viewCount}}</td>
                         </tr>
                         </tbody>
                     </table>
