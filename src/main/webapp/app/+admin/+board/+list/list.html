@@ -1,0 +1,77 @@
+<div class="page-header">
+    <ol class="breadcrumb re">
+        <li><a ui-sref="home"><i class="fa fa-home"></i> Home</a></li>
+        <li>Admin</li>
+        <li class="active">Board</li>
+    </ol>
+    <h3 class="tit">
+        Board List
+    </h3>
+</div>
+<div class="separator-2"></div>
+<section class="content">
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+        </ul>
+        <div class="tab-content">
+            <div class="table-search">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2">
+                            <select class="select01 wd_150" ng-model="vm.keywordType">
+                                <option value="all">All</option>
+                                <option value="title">Subject</option>
+                                <option value="name">Writer</option>
+                            </select>
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control wd_90p" ng-model="vm.keyword">
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-sm wd_100 pull-right" button-style><i class="fa fa-search fa-fw"></i> Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane active mg_t50" id="mtlist_tab1">
+                <div class="row">
+                    <label class="fs_14">Search Results <span class="text-olive mg_l10">{{vm.totalCount}}</span></label>
+                    <select class="select02 wd_50 pull-right" ng-model="vm.pageSize">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <div class="table-responsive mg_t5">
+                    <table class="table table-hover text-center">
+                        <thead>
+                        <tr>
+                            <th style="width:7%">No.</th>
+                            <th>Subject</th>
+                            <th style="width:10%">Attachments</th>
+                            <th style="width:20%">Writer</th>
+                            <th style="width:12%">Date</th>
+                            <th style="width:7%">Views</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="data in vm.boardList" ui-sref="admin.boarddetail({filter: vm.stateParamFilter, id: data.id})">
+                            <td>{{data.id}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-success btn-sm pull-right mg_t20" ui-sref="admin.boardcreation"><i
+                        class="fa fa-pencil fa-fw"></i> Write
+                </button>
+                <div class="text-center">
+                    <ul uib-pagination boundary-links="true" max-size="10" force-ellipses="true"
+                        total-items="vm.totalCount" items-per-page="vm.pageSize" ng-model="vm.currentPage"
+                        ng-change="vm.search()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+                        first-text="&laquo;" last-text="&raquo;"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
