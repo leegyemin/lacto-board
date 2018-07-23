@@ -1,0 +1,73 @@
+<div class="page-header">
+    <ol class="breadcrumb re">
+        <li><a ui-sref="home"><i class="fa fa-home"></i> Home</a></li>
+        <li>Admin</li>
+        <li class="active">Board</li>
+    </ol>
+    <h3 class="tit">
+        Board
+    </h3>
+</div>
+<div class="separator-2"></div>
+<section class="content">
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <th style="width:15%;" class="text-center">Subject</th>
+                <td><input type="text" class="form-control" ng-model="vm.data.title"></td>
+            </tr>
+            <tr ng-if="false">
+                <th class="text-center">Category</th>
+                <td>
+                    <select class="select01">
+                        <option>- Select -</option>
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="text-center">Writer</th>
+                <td>{{vm.data.name}}</td>
+            </tr>
+            <tr>
+                <th class="text-center">Contents</th>
+                <td>
+                    <div class="summernote" summernote height="300" ng-model="vm.data.content"
+                         on-image-upload="vm.imageUpload(files)" editable="vm.editable" editor="vm.editor"></div>
+                </td>
+            </tr>
+            <tr>
+                <th class="text-center">Attachments</th>
+                <td>
+                    <button class="btn btn-default btn-sm" type="button" ngf-select="vm.fileUpload($file)"> Upload
+                    </button>
+                    <div class="file_area">
+                        <ul class="list-unstyled">
+                            <li ng-repeat="file in vm.data.uploadFileList">
+                                <a ng-click="vm.deleteFile($index, file)">
+                                    <i class="fa fa-times fa-fw text-red"></i>
+                                </a>
+                                <a href="{{file.path}}" download="{{file.originalName}}">{{file.originalName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="pad_tb10">
+        <button type="button" class="btn btn-default btn-sm" ui-sref="admin.boardlist">List</button>
+        <button type="button" class="btn btn-success btn-sm pull-right" ng-show="!vm.data.id" ng-click="vm.write()"><i
+                class="fa fa-pencil fa-fw"></i> Write
+        </button>
+        <button type="button" class="btn btn-success btn-sm pull-right" ng-show="vm.data.id" ng-click="vm.modify()"><i
+                class="fa fa-pencil fa-fw"></i> Modify
+        </button>
+    </div>
+</section>
