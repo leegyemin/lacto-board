@@ -1,0 +1,75 @@
+<div class="page-header">
+    <ol class="breadcrumb re">
+        <li><a ui-sref="home"><i class="fa fa-home"></i> Home</a></li>
+        <li>Admin</li>
+        <li class="active">Board</li>
+    </ol>
+    <h3 class="tit">
+        Board
+    </h3>
+</div>
+<div class="separator-2"></div>
+<section class="content">
+    <div class="board_box">
+        <div class="title_wrap">
+            <h3 class="title">{{vm.board.title}}<span class="text-red"> [{{vm.board.replyList.length}}]</span></h3>
+            <div class="add_info">
+                Views. {{vm.board.viewCount}}
+            </div>
+        </div>
+        <div class="private_wrap">
+            <div class="clipboard">
+                <button type="button" class="btn btn-default btn-xs"
+                        ng-show="vm.board.accountCode === vm.accountInfo.accountCode"
+                        ui-sref="admin.boardcreation({id:vm.board.id})"><i class="fa fa-edit fa-fw"></i> Modify
+                </button>
+                <button type="button" class="btn btn-default btn-xs"
+                        ng-show="vm.board.accountCode === vm.accountInfo.accountCode" ng-click="vm.inactiveBoard()"><i
+                        class="fa fa-trash-o fa-fw"></i> Delete
+                </button>
+                {{vm.board.updated | date:'yyyy-MM-dd hh:mm'}}
+            </div>
+            <div class="viewboard" ng-bind-html="vm.board.content">
+
+            </div>
+            <div class="board_file" ng-show="vm.board.uploadFileList.length > 0">
+                <ul>
+                    <li ng-repeat="file in vm.board.uploadFileList">
+                        <a href="{{file.path}}" download="{{file.originalName}}">
+                            <i class="fa fa-paperclip fa-fw"></i>
+                            {{file.originalName}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="reply_box">
+            <div class="opinion_reg">
+                <textarea rows="5" cols="50" name="" placeholder="Comment" ng-model="vm.replyText"></textarea>
+                <button class="btn btn-success btn_reply" ng-click="vm.writeReply()">send</button>
+            </div>
+            <ul class="opinion_list">
+                <li ng-repeat="data in vm.board.replyList">
+                    <div class="cont">
+                        <p class="desc" ng-show="!data.modify"><i class="fa fa-commenting-o" aria-hidden="true"></i>
+                            {{data.content}}</p>
+                        <p>
+                            <span class="reply_write">{{data.name}} | {{data.updated | date:'yyyy-MM-dd hh:mm'}}</span>
+                            <a ng-show="data.accountCode === vm.accountInfo.accountCode"
+                               ng-click="data.modify = true"><i class="fa fa-pencil fa-fw"></i></a>
+                            <a ng-show="data.accountCode === vm.accountInfo.accountCode"
+                               ng-click="vm.deleteReply(data.reply_num)"><i class="fa fa-trash-o"></i></a>
+                        </p>
+                    </div>
+                    <div class="opinion_reg" ng-show="data.modify">
+                        <textarea rows="5" cols="50" name="" placeholder="Comment" ng-model="data.content"></textarea>
+                        <button class="btn btn-success btn_reply" ng-click="vm.modifyReply(data)">Modify</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pad_tb10">
+        <button type="button" class="btn btn-default btn-sm" ui-sref="admin.boardlist">List</button>
+    </div>
+</section>
