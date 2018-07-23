@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -16,7 +16,7 @@
         function initialize() {
             $rootScope.VERSION = VERSION;
 
-            var stateChangeStart = $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams, fromState) {
+            var stateChangeStart = $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams, fromState) {
                 console.groupEnd();
                 console.group(toState.name + ' (' + toState.url + ')');
                 $rootScope.toState = toState;
@@ -36,12 +36,7 @@
                 }
 
                 if (Principal.isIdentityResolved()) {
-                    if (!Principal.isAuthenticated() &&
-                        toState.name !== 'home' &&
-                        toState.name !== 'privacypolicy' &&
-                        toState.name !== 'support.whatispeppermint' &&
-                        toState.name !== 'sessionexpired' &&
-                        toState.name !== 'serviceunavailable') {
+                    if (!Principal.isAuthenticated() && toState.name !== 'home' && toState.name !== 'sessionexpired') {
                         $rootScope.stateResolved = true;
                         event.preventDefault();
                         $state.go('home');
@@ -63,18 +58,18 @@
                 }
             });
 
-            var stateChangeSuccess = $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+            var stateChangeSuccess = $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
                 $rootScope.stateResolved = true;
             });
 
-            var stateChangeError = $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams) {
+            var stateChangeError = $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams) {
                 $log.error(event);
                 $log.error('$stateChangeError: \'' + fromState.url + '(' + fromState.name + ')\' --> \'' + toState.url + '(' + toState.name + ')\'');
                 $rootScope.stateResolved = true;
                 $state.go('error');
             });
 
-            $rootScope.$on('$destroy', function() {
+            $rootScope.$on('$destroy', function () {
                 if (angular.isDefined(stateChangeStart) &&
                     stateChangeStart !== null) {
                     stateChangeStart();
